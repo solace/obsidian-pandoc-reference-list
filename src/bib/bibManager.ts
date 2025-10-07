@@ -705,7 +705,7 @@ export class BibManager {
     // Do we need this?
     // source.engine.updateItems(Array.from(resolvedKeys));
 
-    const citations = cite(source.engine, filtered);
+    const citations = cite(source.engine, filtered, this.plugin.settings.citekeyUsesYearSuffix ?? false);
 
     if (
       cachedDoc &&
