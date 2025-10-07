@@ -149,7 +149,12 @@ export function cite(engine: any, group: CitationGroup[]) {
     }
   });
 
-  const bakedCites = engine.rebuildProcessorState(realCites, 'html');
+  const bakedCites = engine.rebuildProcessorState(realCites, 'html')
+  // Includes fix for https://github.com/mgmeyers/obsidian-pandoc-reference-list/issues/138 to use recognised cite year with incremented suffix in citations.
+  bakedCites = bakedCites.map((item, ix) => {
+    item[2] = item[2].replace(/ [a-z0-9]+/,` ${realCites[ix].citationItems[0].id.split('_').pop()}`);
+    return item;
+  });
   const cites: Record<string, RenderedCitation> = {};
   const makes: Record<string, RenderedCitation> = {};
 
