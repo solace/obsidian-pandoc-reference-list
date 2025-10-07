@@ -27,6 +27,8 @@ export default {
   'Show citekey tooltips': 'Show citekey tooltips',
   'When enabled, hovering over citekeys will open a tooltip containing a formatted citation.':
     'When enabled, hovering over citekeys will open a tooltip containing a formatted citation.',
+  'Citekey uses year suffix': 'Citekey uses year suffix',
+  'Do citekeys end in year? eg. author_year': 'Do citekeys end in year? eg. author_year',
   'Tooltip delay': 'Tooltip delay',
   'Set the amount of time (in milliseconds) to wait before displaying tooltips.':
     'Set the amount of time (in milliseconds) to wait before displaying tooltips.',

@@ -705,7 +705,7 @@ export class BibManager {
     // Do we need this?
     // source.engine.updateItems(Array.from(resolvedKeys));
 
-    const citations = cite(source.engine, filtered, this.plugin.settings.citekeyUsesYearSuffix ?? false);
+    const citations = cite(source.engine, filtered, this.plugin.settings.citekeyUsesYearSuffix);
 
     if (
       cachedDoc &&
@@ -727,7 +727,7 @@ export class BibManager {
 
     metadata.entry_ids?.forEach((e: string, i: number) => {
       entries[i] = entries[i].replace(/>/, ` data-citekey="${e[0]}">`);
-      if (citekeyUsesYearSuffix) {
+      if (this.plugin.settings.citekeyUsesYearSuffix) {
         entries[i] = entries[i].replace(/\([a-z0-9]+\)\./,`(${e[0].split('_').pop()}).`)
       }
       citeBibMap.set(e[0], entries[i]);

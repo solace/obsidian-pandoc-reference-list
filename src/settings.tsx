@@ -42,6 +42,7 @@ export interface ReferenceListSettings {
 
   hideLinks?: boolean;
   showCitekeyTooltips?: boolean;
+  citekeyUsesYearSuffix?: boolean;
   tooltipDelay: number;
   enableCiteKeyCompletion?: boolean;
   renderCitations?: boolean;
