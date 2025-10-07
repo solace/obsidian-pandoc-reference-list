@@ -135,7 +135,7 @@ function sanitize(val: string) {
   return decodeHtml(val.replace(/\[NO_PRINTED_FORM\] */g, ''));
 }
 
-export function cite(engine: any, group: CitationGroup[]) {
+export function cite(engine: any, group: CitationGroup[], citekeyUsesYearSuffix = false) {
   const { output, idToGroup } = getCiteprocCites(group, engine.opt.xclass);
 
   const makeCites: CiteprocCite[] = [];
@@ -151,10 +151,13 @@ export function cite(engine: any, group: CitationGroup[]) {
 
   const bakedCites = engine.rebuildProcessorState(realCites, 'html')
   // Includes fix for https://github.com/mgmeyers/obsidian-pandoc-reference-list/issues/138 to use recognised cite year with incremented suffix in citations.
-  bakedCites = bakedCites.map((item, ix) => {
-    item[2] = item[2].replace(/ [a-z0-9]+/,` ${realCites[ix].citationItems[0].id.split('_').pop()}`);
-    return item;
-  });
+  if (citekeyUsesYearSuffix) {
+    bakedCites = bakedCites.map((item, ix) => {
+      item[2] = item[2].replace(/ [a-z0-9]+/,` ${realCites[ix].citationItems[0].id.split('_').pop()}`);
+      return item;
+    });
+  }
+
   const cites: Record<string, RenderedCitation> = {};
   const makes: Record<string, RenderedCitation> = {};
 
