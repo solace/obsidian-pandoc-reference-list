@@ -727,6 +727,9 @@ export class BibManager {
 
     metadata.entry_ids?.forEach((e: string, i: number) => {
       entries[i] = entries[i].replace(/>/, ` data-citekey="${e[0]}">`);
+      if (citekeyUsesYearSuffix) {
+        entries[i] = entries[i].replace(/\([a-z0-9]+\)\./,`(${e[0].split('_').pop()}).`)
+      }
       citeBibMap.set(e[0], entries[i]);
     });
 
