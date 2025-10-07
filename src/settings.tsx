@@ -360,6 +360,22 @@ export class ReferenceListSettingsTab extends PluginSettingTab {
       );
 
     new Setting(containerEl)
+      .setName(t('Citekey uses year suffix'))
+      .setDesc(
+        t(
+          'Do citekeys end in year? eg. author_year'
+        )
+      )
+      .addToggle((text) =>
+        text
+          .setValue(!!this.plugin.settings.citekeyUsesYearSuffix)
+          .onChange((value) => {
+            this.plugin.settings.citekeyUsesYearSuffix = value;
+            this.plugin.saveSettings();
+          })
+      );
+    
+    new Setting(containerEl)
       .setName(t('Tooltip delay'))
       .setDesc(
         t(
